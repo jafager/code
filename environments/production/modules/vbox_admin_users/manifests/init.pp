@@ -29,7 +29,7 @@ class vbox_admin_users
         ensure => directory,
         owner => jafager,
         group => jafager,
-        mode => 0700,
+        mode => '0700',
         require => User['jafager'],
     }
 
@@ -37,7 +37,7 @@ class vbox_admin_users
         ensure => directory,
         owner => jafager,
         group => jafager,
-        mode => 0700,
+        mode => '0700',
         require => File['/home/jafager'],
     }
 
@@ -45,7 +45,7 @@ class vbox_admin_users
         ensure => present,
         owner => jafager,
         group => jafager,
-        mode => 0600,
+        mode => '0600',
         require => File['/home/jafager/.ssh'],
     }
 
