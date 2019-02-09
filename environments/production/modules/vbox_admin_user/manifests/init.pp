@@ -30,15 +30,15 @@ class vbox_admin_user (String $username, String $fullname, Integer $uid, String 
         home => "/home/${username}",
         shell => '/bin/bash',
         purge_ssh_keys => true,
-        require => Group["${username}"],
+        require => Group[$username],
     }
 
     file { "/home/${username}":
         ensure => directory,
-        owner => ${username},
-        group => ${username},
+        owner => $username,
+        group => $username,
         mode => '0700',
-        require => User["${username}"],
+        require => User[$username],
     }
 
     file { "/home/${username}/.ssh":
