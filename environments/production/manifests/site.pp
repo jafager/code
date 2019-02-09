@@ -1,7 +1,7 @@
 node default
 {
 
-    class { 'vbox_admin_users':
+    class { 'vbox_administrators':
     }
 
 }
