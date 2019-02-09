@@ -38,8 +38,8 @@ class vbox_admin_user (String $username, String $fullname, Integer $uid, String 
 
     file { "/home/${username}/.ssh/authorized_keys":
         ensure => present,
-        owner => ${username},
-        group => ${username},
+        owner => $username,
+        group => $username,
         mode => '0600',
         require => File["/home/${username}/.ssh"],
     }
@@ -54,8 +54,8 @@ class vbox_admin_user (String $username, String $fullname, Integer $uid, String 
 
     file { "/home/${username}/.hushlogin":
         ensure => present,
-        owner => ${username},
-        group => ${username},
+        owner => $username,
+        group => $username,
         mode => '0600',
         content => '',
         require => File["/home/${username}"],
