@@ -49,7 +49,7 @@ class vbox_admin_user (String $username, String $fullname, Integer $uid, String 
         user => $username,
         type => 'ssh-rsa',
         key => "$sshkey,
-        require => File["/home/${username}/.ssh"],
+        require => File["/home/$username/.ssh"],
     }
 
     file { "/home/${username}/.hushlogin":
