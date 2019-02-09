@@ -3,7 +3,7 @@ class vbox_sudo_group (String $groupname, Integer $gid)
 
     group { "${groupname}":
         ensure => present,
-        gid => ${gid},
+        gid => $gid,
     }
 
     file { "/etc/sudoers.d/${groupname}":

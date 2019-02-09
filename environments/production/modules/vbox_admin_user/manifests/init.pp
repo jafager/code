@@ -22,7 +22,7 @@ class vbox_admin_user (String $username, String $fullname, Integer $uid, String 
     user { "${username}":
         ensure => present,
         uid => $uid,
-        gid => "${username}",
+        gid => $username,
         groups => [
             'admins',
         ],
