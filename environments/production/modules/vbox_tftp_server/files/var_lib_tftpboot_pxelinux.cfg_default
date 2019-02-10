@@ -1,0 +1,15 @@
+DEFAULT menu.c32
+PROMPT 0
+TIMEOUT 0
+
+MENU TITLE VirtualBox Deployment
+
+LABEL centos7
+MENU LABEL Install CentOS 7 (SELinux enforcing)
+KERNEL vmlinuz.centos7
+APPEND initrd=initrd.img.centos7 inst.ks=http://192.168.254.2/centos7_selinux.ks
+
+LABEL centos7_separate_home
+MENU LABEL Install CentOS 7 (SELinux enforcing, separate /home)
+KERNEL vmlinuz.centos7
+APPEND initrd=initrd.img.centos7 inst.ks=http://192.168.254.2/centos7_selinux_home.ks

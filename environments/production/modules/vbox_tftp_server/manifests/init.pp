@@ -57,4 +57,21 @@ class vbox_tftp_server
         enable => true,
     }
 
+    file { '/var/lib/tftpboot/pxelinux.cfg':
+        ensure => directory,
+        owner => root,
+        group => root,
+        mode => '0755',
+        require => Package['syslinux-tftpboot'],
+    }
+
+    file { '/var/lib/tftpboot/pxelinux.cfg/default':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_tftp_server/var_lib_tftpboot_pxelinux.cfg',
+        require => File['/var/lib/tftpboot/pxelinux.cfg'],
+    }
+
 }
