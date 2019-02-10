@@ -1,7 +1,9 @@
 node default
 {
 
-    class { 'vbox_administrators':
+    class { 'vbox_sudo_group':
+        groupname => 'admins',
+        gid => 2100,
     }
 
 }

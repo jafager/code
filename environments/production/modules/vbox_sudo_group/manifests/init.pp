@@ -1,7 +1,7 @@
 class vbox_sudo_group (String $groupname, Integer $gid)
 {
 
-    group { "${groupname}":
+    group { $groupname:
         ensure => present,
         gid => $gid,
     }
@@ -10,7 +10,7 @@ class vbox_sudo_group (String $groupname, Integer $gid)
         ensure => present,
         owner => root,
         group => root,
-        mode => '0600',
+        mode => 0600,
         content => "%${groupname} ALL=(ALL) NOPASSWD: ALL",
     }
 
