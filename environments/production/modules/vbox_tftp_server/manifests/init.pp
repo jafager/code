@@ -32,21 +32,21 @@ class vbox_tftp_server
     }
 
     exec { 'firewalld create tftp service':
-        cmd => 'firewall-cmd --permanent --new-service=tftp; firewall-cmd --permanent --service=tftp --add-port=69/udp',
+        command => 'firewall-cmd --permanent --new-service=tftp; firewall-cmd --permanent --service=tftp --add-port=69/udp',
         path => '/bin',
         refreshonly => true,
         subscribe => Package['tftp-server'],
     }
 
     exec { 'firewalld add tftp service':
-        cmd => 'firewall-cmd --permanent --add-service=tftp',
+        command => 'firewall-cmd --permanent --add-service=tftp',
         path => '/bin',
         refreshonly => true,
         subscribe => Exec['firewalld create tftp service'],
     }
 
     exec { 'firewalld reload':
-        cmd => 'firewall-cmd --reload',
+        command => 'firewall-cmd --reload',
         path => '/bin',
         refreshonly => true,
         subscribe => Exec['firewalld add tftp service'],
