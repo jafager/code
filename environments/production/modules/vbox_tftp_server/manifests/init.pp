@@ -70,7 +70,7 @@ class vbox_tftp_server
         owner => root,
         group => root,
         mode => '0644',
-        source => 'puppet:///modules/vbox_tftp_server/var_lib_tftpboot_pxelinux.cfg',
+        source => 'puppet:///modules/vbox_tftp_server/var_lib_tftpboot_pxelinux.cfg_default',
         require => File['/var/lib/tftpboot/pxelinux.cfg'],
     }
 
