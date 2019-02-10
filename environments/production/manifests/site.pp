@@ -5,3 +5,14 @@ node default
     }
 
 }
+
+node genesis.jafager.vbox
+{
+
+    class { 'vbox_administrators':
+    }
+
+    class { 'vbox_dhcp_server':
+    }
+
+}
