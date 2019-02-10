@@ -1,12 +1,12 @@
 class vbox_admin_user (String $username, String $fullname, Integer $uid, String $sshkey)
 {
 
-    group { "${username}":
+    group { $username:
         ensure => present,
         gid => $uid,
     }
 
-    user { "${username}":
+    user { $username:
         ensure => present,
         uid => $uid,
         gid => $username,
@@ -44,12 +44,12 @@ class vbox_admin_user (String $username, String $fullname, Integer $uid, String 
         require => File["/home/${username}/.ssh"],
     }
 
-    ssh_authorized_key { "${username}":
+    ssh_authorized_key { $username:
         ensure => present,
         user => $username,
         type => 'ssh-rsa',
-        key => "$sshkey,
-        require => File["/home/$username/.ssh"],
+        key => $sshkey,
+        require => File["/home/${username}/.ssh"],
     }
 
     file { "/home/${username}/.hushlogin":
