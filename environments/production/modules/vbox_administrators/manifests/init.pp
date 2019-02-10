@@ -45,7 +45,7 @@ class vbox_administrators
 
     file { '/home/jafager/.ssh':
         ensure => directory,
-        owner => jafager
+        owner => jafager,
         group => jafager,
         mode => '0700',
         require => File['/home/jafager'],
@@ -53,7 +53,7 @@ class vbox_administrators
 
     file { '/home/jafager/.ssh/authorized_keys':
         ensure => directory,
-        owner => jafager
+        owner => jafager,
         group => jafager,
         mode => '0700',
         require => File['/home/jafager/.ssh'],
