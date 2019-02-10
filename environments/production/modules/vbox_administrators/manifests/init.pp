@@ -52,7 +52,7 @@ class vbox_administrators
     }
 
     file { '/home/jafager/.ssh/authorized_keys':
-        ensure => directory,
+        ensure => present,
         owner => jafager,
         group => jafager,
         mode => '0700',
