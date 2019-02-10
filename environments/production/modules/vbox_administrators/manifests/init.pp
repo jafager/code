@@ -67,7 +67,7 @@ class vbox_administrators
         require => File['/home/jafager/.ssh/authorized_keys'],
     }
 
-    file { '/home/jafager/.hushlogin":
+    file { '/home/jafager/.hushlogin':
         ensure => present,
         owner => jafager,
         group => jafager,
