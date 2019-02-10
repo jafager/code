@@ -14,4 +14,10 @@ class vbox_dhcp_server
         require => Package['dhcp'],
     }
 
+    service { 'dhcpd':
+        ensure => running,
+        enable => true,
+        subscribe => File['/etc/dhcp/dhcpd.conf'],
+    }
+
 }
