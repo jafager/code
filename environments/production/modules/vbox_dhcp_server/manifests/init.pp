@@ -6,7 +6,6 @@ class vbox_dhcp_server
     }
 
     file { '/etc/dhcp/dhcpd.conf':
-    {
         ensure => present,
         owner => root,
         group => root,
