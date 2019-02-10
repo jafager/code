@@ -15,4 +15,7 @@ node genesis.jafager.vbox
     class { 'vbox_dhcp_server':
     }
 
+    class { 'vbox_tftp_server':
+    }
+
 }
