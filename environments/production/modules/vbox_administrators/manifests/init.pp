@@ -34,7 +34,7 @@ class vbox_administrators
 
     file { '/home/jafager':
         ensure => directory,
-        owner => jafager
+        owner => jafager,
         group => jafager,
         mode => '0700',
         require => [
