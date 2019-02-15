@@ -106,7 +106,7 @@ class vbox_genesis
         require => Package['httpd'],
     }
 
-    file { '/var/www/html/centos7_selinux.ks':
+    file { '/var/www/html/centos7_selinux_separate_home.ks':
         ensure => present,
         owner => root,
         group => root,
