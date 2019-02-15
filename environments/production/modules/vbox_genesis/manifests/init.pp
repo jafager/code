@@ -80,28 +80,45 @@ class vbox_genesis
     }
 
     ###
-    ### Firewalld
+    ### HTTP
     ###
 
-    exec { 'firewalld create tftp service':
-        command => 'firewall-cmd --permanent --new-service=tftp; firewall-cmd --permanent --service=tftp --add-port=69/udp',
-        path => '/bin',
-        refreshonly => true,
-        subscribe => Package['tftp-server'],
+    package { 'httpd':
+        ensure => present,
     }
+
+    service { 'httpd':
+        ensure => running,
+        enable => true,
+        require => Package['httpd'],
+    }
+
+    ###
+    ### firewalld
+    ###
 
     exec { 'firewalld add tftp service':
         command => 'firewall-cmd --permanent --add-service=tftp',
         path => '/bin',
         refreshonly => true,
-        subscribe => Exec['firewalld create tftp service'],
+        subscribe => Package['tftp-server'],
+    }
+
+    exec { 'firewalld add http service':
+        command => 'firewall-cmd --permanent --add-service=http',
+        path => '/bin',
+        refreshonly => true,
+        subscribe => Package['httpd'],
     }
 
     exec { 'firewalld reload':
         command => 'firewall-cmd --reload',
         path => '/bin',
         refreshonly => true,
-        subscribe => Exec['firewalld add tftp service'],
+        subscribe => [
+            Exec['firewalld add tftp service'],
+            Exec['firewalld add http service'],
+        ],
     }
 
     service { 'firewalld':
