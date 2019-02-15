@@ -12,10 +12,7 @@ node genesis.jafager.vbox
     class { 'vbox_administrators':
     }
 
-    class { 'vbox_dhcp_server':
-    }
-
-    class { 'vbox_tftp_server':
+    class { 'vbox_genesis':
     }
 
 }

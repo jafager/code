@@ -1,5 +1,32 @@
-class vbox_tftp_server
+class vbox_genesis
 {
+
+    ###
+    ### DHCP
+    ###
+
+    package { 'dhcp':
+        ensure => present,
+    }
+
+    file { '/etc/dhcp/dhcpd.conf':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_genesis/etc_dhcp_dhcpd.conf',
+        require => Package['dhcp'],
+    }
+
+    service { 'dhcpd':
+        ensure => running,
+        enable => true,
+        subscribe => File['/etc/dhcp/dhcpd.conf'],
+    }
+
+    ###
+    ### TFTP
+    ###
 
     package { 'tftp-server':
         ensure => present,
@@ -19,7 +46,7 @@ class vbox_tftp_server
         owner => root,
         group => root,
         mode => '0644',
-        source => 'puppet:///modules/vbox_tftp_server/etc_xinetd.d_tftp',
+        source => 'puppet:///modules/vbox_genesis/etc_xinetd.d_tftp',
         require => [
             Package['xinetd'],
             Package['tftp-server'],
@@ -30,6 +57,31 @@ class vbox_tftp_server
         ensure => running,
         subscribe => File['/etc/xinetd.d/tftp'],
     }
+
+    ###
+    ### PXE
+    ###
+
+    file { '/var/lib/tftpboot/pxelinux.cfg':
+        ensure => directory,
+        owner => root,
+        group => root,
+        mode => '0755',
+        require => Package['syslinux-tftpboot'],
+    }
+
+    file { '/var/lib/tftpboot/pxelinux.cfg/default':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_genesis/var_lib_tftpboot_pxelinux.cfg_default',
+        require => File['/var/lib/tftpboot/pxelinux.cfg'],
+    }
+
+    ###
+    ### Firewalld
+    ###
 
     exec { 'firewalld create tftp service':
         command => 'firewall-cmd --permanent --new-service=tftp; firewall-cmd --permanent --service=tftp --add-port=69/udp',
@@ -55,23 +107,6 @@ class vbox_tftp_server
     service { 'firewalld':
         ensure => running,
         enable => true,
-    }
-
-    file { '/var/lib/tftpboot/pxelinux.cfg':
-        ensure => directory,
-        owner => root,
-        group => root,
-        mode => '0755',
-        require => Package['syslinux-tftpboot'],
-    }
-
-    file { '/var/lib/tftpboot/pxelinux.cfg/default':
-        ensure => present,
-        owner => root,
-        group => root,
-        mode => '0644',
-        source => 'puppet:///modules/vbox_tftp_server/var_lib_tftpboot_pxelinux.cfg_default',
-        require => File['/var/lib/tftpboot/pxelinux.cfg'],
     }
 
 }
