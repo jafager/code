@@ -5,7 +5,7 @@ auth
 zerombr
 clearpart --all --initlabel
 bootloader --location=mbr
-url --url http://mirror.cs.pitt.edu/centos/
+url --url http://mirror.cs.pitt.edu/centos/7/os/x86_64
 selinux --enforcing
 timezone --utc America/New_York
 part /boot --size=1024 --asprimary --fstype=xfs
