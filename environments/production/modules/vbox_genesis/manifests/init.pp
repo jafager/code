@@ -79,6 +79,24 @@ class vbox_genesis
         require => File['/var/lib/tftpboot/pxelinux.cfg'],
     }
 
+    file { '/var/lib/tftpboot/vmlinuz.centos7':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_genesis/var_lib_tftpboot_vmlinuz.centos7',
+        require => Package['syslinux-tftpboot'],
+    }
+
+    file { '/var/lib/tftpboot/initrd.img.centos7':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_genesis/var_lib_tftpboot_initrd.img.centos7',
+        require => Package['syslinux-tftpboot'],
+    }
+
     ###
     ### HTTP
     ###
