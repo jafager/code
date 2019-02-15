@@ -94,6 +94,28 @@ class vbox_genesis
     }
 
     ###
+    ### Kickstart
+    ###
+
+    file { '/var/www/html/centos7_selinux.ks':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_genesis/kickstart/centos7_selinux.ks',
+        require => Package['httpd'],
+    }
+
+    file { '/var/www/html/centos7_selinux.ks':
+        ensure => present,
+        owner => root,
+        group => root,
+        mode => '0644',
+        source => 'puppet:///modules/vbox_genesis/kickstart/centos7_selinux_separate_home.ks',
+        require => Package['httpd'],
+    }
+
+    ###
     ### firewalld
     ###
 
